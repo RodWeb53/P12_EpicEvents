@@ -14,13 +14,29 @@ class Password():
 
         hash = bcrypt.hashpw(bytes, salt)
 
+        hash = hash.decode("utf8")
+
         return hash
 
-    def verify_password(self, password_entry, mdp_de_la_base):
+    def verify_password(self, password, mdp_de_la_base):
         """Vérification du mot de passe saisie et celui de la base de données"""
 
-        userBytes = password_entry.encode('utf-8')
+        password = password.encode('utf8')
 
-        result = bcrypt.checkpw(userBytes, mdp_de_la_base)
+        print(bcrypt.checkpw(password, mdp_de_la_base.encode("utf8")))
 
-        return result
+        if bcrypt.checkpw(password, mdp_de_la_base.encode("utf8")):
+            print("match")
+            print("Le mot de passe est correcte")
+            return 1
+        else:
+            print("does not match")
+            print("Le mot de passe est incorecte")
+            return 2
+
+        # result = bcrypt.checkpw(hash, mdp_de_la_base)
+
+        # print("les donnes de decrypt")
+        # print(result)
+
+        # return result

@@ -21,6 +21,7 @@ class AddUserView:
             phone_mobile = self.utils_user.display_menu_phone_mobile(self)
             password = self.utils_user.display_menu_password(self)
             is_staff = False
+            role = self.utils_user.display_menu_role(self)
             is_active = self.utils_user.display_menu_is_active(self)
             choice_user = self.utils_user.display_menu_user_choice_save(self)
             create_entry = False
@@ -33,6 +34,7 @@ class AddUserView:
                 "phone": str(phone),
                 "phone_mobile": str(phone_mobile),
                 "password": str(password),
+                "role_id": int(role),
                 "is_staff": is_staff,
                 "is_active": is_active,
             }

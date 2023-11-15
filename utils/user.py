@@ -2,6 +2,7 @@
 from rich.prompt import Prompt
 from rich.console import Console
 from rich.text import Text
+from rich.table import Table
 from email_validator import validate_email, EmailNotValidError
 from utils.password import Password
 import getpass
@@ -148,8 +149,6 @@ class UtilsUser:
 
         password_user = Password.hash_password(self, password)
 
-        print("le mot de pass haché est ")
-        print(password_user)
         return password_user
 
     def display_menu_is_active(self):
@@ -177,6 +176,46 @@ class UtilsUser:
                 is_active = Prompt.ask("Votre nouvelle saisie >> ")
 
         return is_active
+
+    def display_menu_role(self):
+        """Affectation d'un rôle à un employé"""
+        print("")
+        table = Table(title="Rôle de l'employé", width=80, style="green", show_lines=True)
+
+        table.add_column("N°", style="cyan", width=10, justify="center")
+        table.add_column("Rôle", style="cyan", width=70)
+
+        table.add_row("1", "Commercial")
+        table.add_row("2", "Support")
+        table.add_row("3", "Gestion")
+        table.add_row("4", "Aucun")
+
+        console = Console()
+        console.print(table)
+
+        text = (Text("Entrez le numéro du rôle à affecter :", style="blue"))
+        console.print(text)
+        role = Prompt.ask("Votre saisie >> ")
+        verify = True
+        while verify:
+            if role == "1":
+                verify = False
+                return 1
+            elif role == "2":
+                verify = False
+                return 2
+            elif role == "3":
+                verify = False
+                return 3
+            elif role == "4":
+                verify = False
+                return ""
+            else:
+                text = (Text("La réponse saisie n'est pas correcte", style="red"))
+                console.print(text)
+                text = (Text("Entrez le numéro du rôle à affecter :", style="red"))
+                console.print(text)
+                role = Prompt.ask("Votre nouvelle saisie >> ")
 
     def display_menu_user_choice_save(self):
         """Vérification si l'utilisateur veut enregistrer l'employé'"""

@@ -7,18 +7,18 @@ from .menu_event_controller import EventMenuController
 from .menu_user_controller import UserMenuController
 
 
-class HomeMenuController:
+class HomeMenuController():
     """Home Menu controller"""
     def __init__(self):
         self.menu = Menu()
         self.view = HomeMenuView(self.menu)
 
-    def __call__(self):
+    def __call__(self, token):
         # 1. Construire le menu (utils/menus.py)
         self.menu.add("auto", "Gestion des clients", ClientMenuController())
         self.menu.add("auto", "Gestion des contrats", ContratMenuController())
         self.menu.add("auto", "Gestion des événements", EventMenuController())
-        self.menu.add("auto", "Gestion des utilisateurs", UserMenuController())
+        self.menu.add("auto", "Gestion des utilisateurs", UserMenuController(token))
         self.menu.add("q", "Quitter l'application", self.end_screen_controller())
         # 2 Demander à la vue d'afficher le menu et de collecter la réponse de l'utilisateur
         user_choice = self.view.get_user_choice()

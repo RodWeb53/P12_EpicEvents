@@ -7,8 +7,8 @@ class ApplicationController:
     def __init__(self):
         self.controller = None
 
-    def start(self):
+    def start(self, token):
         """Fonction de démarrage de l'application"""
         self.controller = HomeMenuController()
         while self.controller:
-            self.controller = self.controller()
+            self.controller = self.controller(token)

@@ -11,12 +11,13 @@ from rich.text import Text
 class UserController:
     """Menu controller pour l'ajout d'un Utilisateur à la BD"""
 
-    def __init__(self):
+    def __init__(self, token):
         self.session = sessionmaker(bind=engine)
         self.user = CustomUser
         self.view = AddUserView()
+        self.token = token
 
-    def add_user(self):
+    def add_user(self, token):
         """ Création d'un employé """
         console = Console()
         user_create = self.view.new_user()

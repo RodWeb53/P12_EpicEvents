@@ -3,23 +3,29 @@ from utils.menus import Menu
 from controllers import menu_home_controller
 from views.menu_user_view import UserMenuView
 from .user_controller import UserController
+from controllers.auth_controller import AuthController
 
 
 class UserMenuController:
     """menu controller pour les clients"""
-    def __init__(self):
+    def __init__(self, token):
         self.menu = Menu()
         self.view = UserMenuView(self.menu)
+        self.token = token
 
-    def __call__(self):
+    def __call__(self, token):
         # 1. Construire le menu (utils/menus.py)
-        self.menu.add("auto", "Afficher tous les utilistaeurs", UserController().view_all_user)
-        self.menu.add("auto", "Afficher un utilisateur", UserController().view_user)
-        self.menu.add("auto", "Ajouter un utilisateur", UserController().add_user)
-        self.menu.add("auto", "Modifier un utilisateur", UserController().delete_user)
-        self.menu.add("auto", "Supprimer un utilisateur", UserController().modify_user)
-        # Ajouter les autres lignes d'option du menus
-        self.menu.add("auto", "Menu principal", menu_home_controller.HomeMenuController())
+        auth = AuthController.decrypt_token(self, self.token)
+        self.menu.add("auto", "Afficher tous les utilisateurs", UserController(self.token).view_all_user)
+        self.menu.add("auto", "Afficher un utilisateur", UserController(self.token).view_user)
+        # Vérification des droits via la token
+        if auth["role_id"] == 2:
+            self.menu.add("auto", "Ajouter un utilisateur", UserController(self.token).add_user)
+            self.menu.add("auto", "Modifier un utilisateur", UserController(self.token).delete_user)
+            self.menu.add("auto", "Supprimer un utilisateur", UserController(self.token).modify_user)
+        else:
+            # Ajout de la ligne de retour au menu
+            self.menu.add("auto", "Menu principal", menu_home_controller.HomeMenuController())
         # 2 Demander à la vue d'afficher le menu et de collecter la réponse de l'utilisateur
         user_choice = self.view.get_user_choice()
         # 3. Retourner le controleur associé au choix de l'utilisateur au controleur principal
