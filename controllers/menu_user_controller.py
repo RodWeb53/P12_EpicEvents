@@ -23,10 +23,11 @@ class UserMenuController:
             self.menu.add("auto", "Ajouter un utilisateur", UserController(self.token).add_user)
             self.menu.add("auto", "Modifier un utilisateur", UserController(self.token).delete_user)
             self.menu.add("auto", "Supprimer un utilisateur", UserController(self.token).modify_user)
-        else:
-            # Ajout de la ligne de retour au menu
-            self.menu.add("auto", "Menu principal", menu_home_controller.HomeMenuController())
+
+        # Ajout de la ligne de retour au menu
+        self.menu.add("auto", "Menu principal", menu_home_controller.HomeMenuController())
         # 2 Demander à la vue d'afficher le menu et de collecter la réponse de l'utilisateur
+
         user_choice = self.view.get_user_choice()
         # 3. Retourner le controleur associé au choix de l'utilisateur au controleur principal
         return user_choice.handler

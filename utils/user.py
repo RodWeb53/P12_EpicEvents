@@ -232,3 +232,10 @@ class UtilsUser:
                 verify = False
 
         return user_choice_save
+
+    def display_menu_user_choice_number(self):
+        console = Console()
+        text = (Text("Entrez le N° de l'employé que vous souhaitez afficher :", style="blue"))
+        console.print(text)
+        choice = Prompt.ask("Votre saisie >> ")
+        return choice
