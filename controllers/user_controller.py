@@ -1,6 +1,7 @@
 """Module controller du menu Utilisateur"""
 from controllers import menu_user_controller
 from models.employe import CustomUser
+from utils.user import UtilsUser
 from views.user_view import AddUserView, EditUserView
 from sqlalchemy.orm import sessionmaker
 from database import engine
@@ -39,18 +40,33 @@ class UserController:
             console.print(text)
             return self.menu_back()
 
-    # def modify_user(self, token):
-    #     choice = EditUserView.choice_user(self)
-    #     session = self.session()
-    #     user = session.query(CustomUser).filter_by(id=choice).first()
-    #     session.close()
-    #     print(user)
-    #     UpdateUserMenuController(self.token)
+    def delete_user(self, token):
+        """Suppression dans la BD de l'employé"""
+        verify = True
+        while verify:
+            # Demande du N° d'utilisateur à supprimer
+            choice = UtilsUser.display_menu_user_choice_modify(self)
+            # vérification que l'utilisateur est connue
+            session = self.session()
+            user = session.query(CustomUser).filter_by(id=choice).first()
+            session.close()
+            if user is not None:
+                verify = False
 
-    def delete_user(self):
-        print("Suppression d'un utilisateur")
-        print("Suppression d'un utilisateur")
-        print("Suppression d'un utilisateur")
+        # Suppression de l'employé dans la BD
+        session = self.session()
+        user = session.query(CustomUser).filter_by(id=choice).first()
+        session.delete(user)
+        session.commit()
+        session.close()
+        console = Console()
+        text = (Text("L'employé à été supprimé avec succès dans la bd", style="green"))
+        console.print(text)
+        session.close()
+        text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
+        console.print(text)
+        input("")
+        return self.menu_back(self.token)
 
     def view_all_user(self, token):
         console = Console()
