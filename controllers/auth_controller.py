@@ -31,6 +31,6 @@ class AuthController:
     def decrypt_token(self, token):
         secret_key = os.environ.get("SECRET_KEY")
         valeur = jwt.decode(token, secret_key, algorithms=["HS256"])
-        print("les valeurs de token décrypté")
-        print(valeur)
+        # print("les valeurs de token décrypté")
+        # print(valeur)
         return valeur

@@ -1,5 +1,6 @@
 """Module controller du menu d'accueil"""
 from utils.menus import Menu
+from utils.clean_screen import clear
 from views.menu_home_view import HomeMenuView
 from .menu_client_controller import ClientMenuController
 from .menu_contrat_controller import ContratMenuController
@@ -14,6 +15,7 @@ class HomeMenuController():
         self.view = HomeMenuView(self.menu)
 
     def __call__(self, token):
+        clear()
         # 1. Construire le menu (utils/menus.py)
         self.menu.add("auto", "Gestion des clients", ClientMenuController())
         self.menu.add("auto", "Gestion des contrats", ContratMenuController())

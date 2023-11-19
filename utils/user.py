@@ -239,3 +239,10 @@ class UtilsUser:
         console.print(text)
         choice = Prompt.ask("Votre saisie >> ")
         return choice
+
+    def display_menu_user_choice_modify(self):
+        console = Console()
+        text = (Text("Entrez le N° de l'employé que vous souhaitez modifier :", style="blue"))
+        console.print(text)
+        choice = Prompt.ask("Votre saisie >> ")
+        return choice

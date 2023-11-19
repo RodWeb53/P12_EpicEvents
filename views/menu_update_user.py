@@ -1,19 +1,19 @@
-"""Module views du menu d'accueil"""
+"""Module views pour la modification des users"""
 from utils.clean_screen import clear
 from rich.console import Console
 from rich.table import Table
 
 
-class HomeMenuView:
-    """Home menu views"""
+class UpdateUserMenuView:
+    """Update utilistateur menu views"""
     def __init__(self, menu):
         self.menu = menu
 
-    # Création d'une méthode pour afficher le menu
+    # Création d'une méthodes pour afficher le menu
     def _display_menu(self):
         # clear()
         print("")
-        table = Table(title="Menu principal", width=80, style="green", show_lines=True)
+        table = Table(title="Menu modification des utilisateurs", width=80, style="green", show_lines=True)
 
         table.add_column("N°", style="cyan", width=10, justify="center")
         table.add_column("Fonctionnalité", style="cyan", width=70)

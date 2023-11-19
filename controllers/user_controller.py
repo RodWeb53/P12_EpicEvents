@@ -1,12 +1,12 @@
 """Module controller du menu Utilisateur"""
 from controllers import menu_user_controller
-# from utils.user import UtilsUser
 from models.employe import CustomUser
 from views.user_view import AddUserView, EditUserView
 from sqlalchemy.orm import sessionmaker
 from database import engine
 from rich.console import Console
 from rich.text import Text
+# from .menu_update_user_controller import UpdateUserMenuController
 
 
 class UserController:
@@ -39,10 +39,13 @@ class UserController:
             console.print(text)
             return self.menu_back()
 
-    def modify_user(self, token):
-        print("Modification d'un utilisateur")
-        print("Modification d'un utilisateur")
-        print("Modification d'un utilisateur")
+    # def modify_user(self, token):
+    #     choice = EditUserView.choice_user(self)
+    #     session = self.session()
+    #     user = session.query(CustomUser).filter_by(id=choice).first()
+    #     session.close()
+    #     print(user)
+    #     UpdateUserMenuController(self.token)
 
     def delete_user(self):
         print("Suppression d'un utilisateur")

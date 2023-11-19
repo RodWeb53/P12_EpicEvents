@@ -26,17 +26,8 @@ class Password():
         print(bcrypt.checkpw(password, mdp_de_la_base.encode("utf8")))
 
         if bcrypt.checkpw(password, mdp_de_la_base.encode("utf8")):
-            print("match")
             print("Le mot de passe est correcte")
             return 1
         else:
-            print("does not match")
             print("Le mot de passe est incorecte")
             return 2
-
-        # result = bcrypt.checkpw(hash, mdp_de_la_base)
-
-        # print("les donnes de decrypt")
-        # print(result)
-
-        # return result

@@ -80,6 +80,7 @@ class EditUserView:
         table.add_row("Email", f"{user.email}")
         table.add_row("Tel fixe", f"{user.phone}")
         table.add_row("Tel mobile", f"{user.phone_mobile}")
+        table.add_row("role", f"{user.role}")
 
         console = Console()
         console.print(table)
