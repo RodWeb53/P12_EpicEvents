@@ -14,7 +14,7 @@ class AuthView:
         verify = True
         console = Console()
         print("")
-        text = (Text("Entrez le login du nouvel employé :", style="blue"))
+        text = (Text("Entrez votre login :", style="blue"))
         console.print(text)
         login = Prompt.ask("Votre saisie >> ")
         while verify:
@@ -33,7 +33,7 @@ class AuthView:
     def verify_password(self, password_bd):
         console = Console()
         print("")
-        text = (Text("Entrez le mot de passe du nouvel employé :", style="blue"))
+        text = (Text("Entrez votre mot de passe :", style="blue"))
         console.print(text)
         text = (Text("Minimum 8 caractères :", style="red"))
         console.print(text)

@@ -17,7 +17,7 @@ class HomeMenuController():
     def __call__(self, token):
         clear()
         # 1. Construire le menu (utils/menus.py)
-        self.menu.add("auto", "Gestion des clients", ClientMenuController())
+        self.menu.add("auto", "Gestion des clients", ClientMenuController(token))
         self.menu.add("auto", "Gestion des contrats", ContratMenuController())
         self.menu.add("auto", "Gestion des événements", EventMenuController())
         self.menu.add("auto", "Gestion des utilisateurs", UserMenuController(token))

@@ -20,6 +20,7 @@ class AuthController:
     def create_token(self, login):
         secret_key = os.environ.get("SECRET_KEY")
         payload = {
+            'id': login.id,
             'last_name': login.last_name,
             'first_name': login.first_name,
             'role_id': login.role_id,

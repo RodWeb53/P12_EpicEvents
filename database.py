@@ -2,6 +2,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models.employe import CustomUser
 from models.role import Role
+from models.client import Client
+from models.contract import Contract
+from models.event import Event
 import os
 from dotenv import load_dotenv, find_dotenv
 
@@ -24,6 +27,9 @@ try:
     Role.metadata.create_all(bind=conn)
     # CustomUser.metadata.drop_all(bind=conn)
     CustomUser.metadata.create_all(bind=conn)
+    Client.metadata.create_all(bind=conn)
+    Contract.metadata.create_all(bind=conn)
+    Event.metadata.create_all(bind=conn)
 
 except Exception as ex:
     print(ex)

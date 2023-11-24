@@ -18,6 +18,8 @@ class CustomUser(Base):
     is_active = Column(Boolean)
     role_id = Column(Integer, ForeignKey('role.id', ondelete="SET NULL"))
     role = relationship("Role", back_populates="employes", lazy="subquery")
+    commercial = relationship("Client", back_populates="contact_commercial")
+    support = relationship("Event", back_populates="contact_support")
 
     def __str__(self):
         return (f"CustomUser(id='{self.id}',"

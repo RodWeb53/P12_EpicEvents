@@ -11,7 +11,7 @@ class UpdateUserMenuView:
 
     # Création d'une méthodes pour afficher le menu
     def _display_menu(self):
-        # clear()
+        clear()
         print("")
         table = Table(title="Menu modification des utilisateurs", width=80, style="green", show_lines=True)
 
