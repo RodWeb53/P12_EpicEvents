@@ -7,20 +7,21 @@ from .event_controller import EventController
 
 class EventMenuController:
     """menu controller pour les contrats"""
-    def __init__(self):
+    def __init__(self, token):
         self.menu = Menu()
         self.view = EventMenuView(self.menu)
+        self.token = token
 
-    def __call__(self):
+    def __call__(self, token):
         # 1. Construire le menu (utils/menus.py)
-        self.menu.add("auto", "Afficher tous les événements", EventController().view_all_event)
-        self.menu.add("auto", "Afficher un événement", EventController().view_event)
-        self.menu.add("auto", "Ajouter un événement", EventController().add_event)
-        self.menu.add("auto", "Afficher les événements non associés", EventController().view_unassociated_event)
-        self.menu.add("auto", "Associer un support à un événement", EventController().view_associated_event)
-        self.menu.add("auto", "Afficher mes événements", EventController().view_my_events)
-        self.menu.add("auto", "Modifier un événement", EventController().delete_event)
-        self.menu.add("auto", "Supprimer un événement", EventController().modify_event)
+        self.menu.add("auto", "Afficher tous les événements", EventController(self.token).view_all_event)
+        self.menu.add("auto", "Afficher un événement", EventController(self.token).view_event)
+        self.menu.add("auto", "Ajouter un événement", EventController(self.token).add_event)
+        self.menu.add("auto", "Afficher les événements non associés", EventController(self.token).view_unassociated_event)
+        self.menu.add("auto", "Associer un support à un événement", EventController(self.token).view_associated_event)
+        self.menu.add("auto", "Afficher mes événements", EventController(self.token).view_my_events)
+        self.menu.add("auto", "Modifier un événement", EventController(self.token).delete_event)
+        self.menu.add("auto", "Supprimer un événement", EventController(self.token).modify_event)
         # Ajouter les autres lignes d'option du menus
         self.menu.add("auto", "Menu principal", menu_home_controller.HomeMenuController())
         # 2 Demander à la vue d'afficher le menu et de collecter la réponse de l'utilisateur

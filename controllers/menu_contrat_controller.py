@@ -7,17 +7,18 @@ from .contrat_controller import ContratController
 
 class ContratMenuController:
     """menu controller pour les contrats"""
-    def __init__(self):
+    def __init__(self, token):
         self.menu = Menu()
         self.view = ContratMenuView(self.menu)
+        self.token = token
 
-    def __call__(self):
+    def __call__(self, token):
         # 1. Construire le menu (utils/menus.py)
-        self.menu.add("auto", "Afficher tous les contrats", ContratController().view_all_contrat)
-        self.menu.add("auto", "Afficher un contrat", ContratController().view_contrat)
-        self.menu.add("auto", "Ajouter un contrat", ContratController().add_contrat)
-        self.menu.add("auto", "Modifier un contrat", ContratController().delete_contrat)
-        self.menu.add("auto", "Supprimer un contrat", ContratController().modify_contrat)
+        self.menu.add("auto", "Afficher tous les contrats", ContratController(self.token).view_all_contrat)
+        self.menu.add("auto", "Afficher un contrat", ContratController(self.token).view_contrat)
+        self.menu.add("auto", "Ajouter un contrat", ContratController(self.token).add_contrat)
+        self.menu.add("auto", "Modifier un contrat", ContratController(self.token).delete_contrat)
+        self.menu.add("auto", "Supprimer un contrat", ContratController(self.token).modify_contrat)
         # Ajouter les autres lignes d'option du menus
         self.menu.add("auto", "Menu principal", menu_home_controller.HomeMenuController())
         # 2 Demander à la vue d'afficher le menu et de collecter la réponse de l'utilisateur

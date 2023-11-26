@@ -18,8 +18,8 @@ class HomeMenuController():
         clear()
         # 1. Construire le menu (utils/menus.py)
         self.menu.add("auto", "Gestion des clients", ClientMenuController(token))
-        self.menu.add("auto", "Gestion des contrats", ContratMenuController())
-        self.menu.add("auto", "Gestion des événements", EventMenuController())
+        self.menu.add("auto", "Gestion des contrats", ContratMenuController(token))
+        self.menu.add("auto", "Gestion des événements", EventMenuController(token))
         self.menu.add("auto", "Gestion des utilisateurs", UserMenuController(token))
         self.menu.add("q", "Quitter l'application", self.end_screen_controller())
         # 2 Demander à la vue d'afficher le menu et de collecter la réponse de l'utilisateur

@@ -1,11 +1,8 @@
-# from utils.clean_screen import clear
 from rich.prompt import Prompt
 from rich.console import Console
 from rich.text import Text
 from rich.table import Table
 from email_validator import validate_email, EmailNotValidError
-# from utils.password import Password
-# import getpass
 
 
 class UtilsUpdateUser:
