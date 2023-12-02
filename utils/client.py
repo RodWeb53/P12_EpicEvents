@@ -9,11 +9,11 @@ class UtilsClient:
     def __init__(self):
         pass
 
-    def display_menu_last_name(self):
+    def display_menu_last_name(self, change):
         """Vérification du nom saisie et le controle"""
         console = Console()
         print("")
-        text = (Text("Entrez le nom du nouveau client :", style="blue"))
+        text = (Text(f"Entrez le nom {change} :", style="blue"))
         console.print(text)
         last_name = Prompt.ask("Votre saisie >> ")
 
@@ -26,11 +26,11 @@ class UtilsClient:
 
         return last_name
 
-    def display_menu_first_name(self):
+    def display_menu_first_name(self, change):
         """Vérification du prénom saisie et le controle"""
         console = Console()
         print("")
-        text = (Text("Entrez le prénom du nouveau client :", style="blue"))
+        text = (Text(f"Entrez le prénom {change} :", style="blue"))
         console.print(text)
         first_name = Prompt.ask("Votre saisie >> ")
 
@@ -43,11 +43,11 @@ class UtilsClient:
 
         return first_name
 
-    def display_menu_email(self):
+    def display_menu_email(self, change):
         """Vérification de l'adresse Email et le controle"""
         console = Console()
         print("")
-        text = (Text("Entrez l'email' du nouveau client :", style="blue"))
+        text = (Text(f"Entrez l'email' {change} :", style="blue"))
         console.print(text)
         email = Prompt.ask("Votre saisie >> ")
 
@@ -65,11 +65,11 @@ class UtilsClient:
             console.print(text)
             return UtilsClient.display_menu_email(self)
 
-    def display_menu_phone(self):
+    def display_menu_phone(self, change):
         """Vérification du téléphone saisie et le controle"""
         console = Console()
         print("")
-        text = (Text("Entrez le N° de téléphone du nouveau client :", style="blue"))
+        text = (Text(f"Entrez le N° de téléphone {change} :", style="blue"))
         console.print(text)
         text = (Text("Format : 0201030405", style="blue"))
         console.print(text)
@@ -87,11 +87,11 @@ class UtilsClient:
 
         return phone
 
-    def display_menu_company_name(self):
+    def display_menu_company_name(self, change):
         """Vérification du nom de l'entreprise'"""
         console = Console()
         print("")
-        text = (Text("Entrez le nom de l'entreprise :", style="blue"))
+        text = (Text(f"Entrez le nom de l'entreprise {change} :", style="blue"))
         console.print(text)
         company_name = Prompt.ask("Votre saisie >> ")
 

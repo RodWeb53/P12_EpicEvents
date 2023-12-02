@@ -1,5 +1,5 @@
 """Module controller du menu Client"""
-from controllers import menu_home_controller
+from controllers import menu_client_controller
 from models.client import Client
 from views.client_view import ClientView
 from sqlalchemy.orm import sessionmaker
@@ -51,16 +51,32 @@ class ClientController:
         print("Suppression d'un client")
 
     def view_all_client(self, token):
-        print("Afficher tous les clients")
-        print("Afficher tous les clients")
-        print("Afficher tous les clients")
+        console = Console()
+        session = self.session()
+        clients = session.query(Client).all()
+        session.close()
+        self.view.view_clients(clients)
+        text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
+        console.print(text)
+        input("")
+        return self.menu_back(self.token)
 
-    def view_client(self):
-        print("Afficher un client")
-        print("Afficher un client")
-        print("Afficher un client")
+    def view_client(self, token):
+        console = Console()
+        session = self.session()
+        clients = session.query(Client).all()
+        session.close()
+        self.view.view_clients(clients)
+        choice = self.view.choice_user(clients)
+        session = self.session()
+        client = session.query(Client).filter_by(client_id=int(choice)).first()
+        self.view.view_one_client(client)
+        text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
+        console.print(text)
+        input("")
+        return self.menu_back(self.token)
 
     def menu_back(self, token):
         """Méthodes pour aller au menu d'accueil"""
-        self.handler = menu_home_controller.HomeMenuController()
+        self.handler = menu_client_controller.ClientMenuController(token)
         return self.handler

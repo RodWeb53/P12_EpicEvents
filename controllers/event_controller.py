@@ -6,8 +6,7 @@ from models.contract import Contract
 from models.employe import CustomUser
 from sqlalchemy.orm import sessionmaker
 from database import engine
-from rich.console import Console
-from rich.text import Text
+from utils.validate import Validate
 
 
 class EventController:
@@ -20,7 +19,6 @@ class EventController:
         self.event = Event
 
     def add_event(self, token):
-        console = Console()
         session = self.session()
         contracts = session.query(Contract).all()
         supports = session.query(CustomUser).filter_by(role_id=2).all()
@@ -30,19 +28,13 @@ class EventController:
             contract = self.event(**add_event)
             session.add(contract)
             session.commit()
-            text = (Text("L'événement à été créé avec succès dans la bd", style="green"))
-            console.print(text)
             session.close()
-            text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
-            console.print(text)
-            input("")
+            validate = "L'événement à été créé avec succès dans la bd"
+            Validate.validate_bd(self, validate)
             return self.menu_back(self.token)
         else:
-            text = (Text("L'événement ne sera pas enregistré", style="red"))
-            console.print(text)
-            text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
-            console.print(text)
-            input("")
+            validate = "L'événement ne sera pas enregistré"
+            Validate.validate_bd(self, validate)
             return self.menu_back(self.token)
 
     def modify_event(self, token):

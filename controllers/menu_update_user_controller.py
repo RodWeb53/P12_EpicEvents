@@ -1,4 +1,4 @@
-"""Module controller du menu Client"""
+"""Module controller du menu USER"""
 from utils.menus import Menu
 from utils.clean_screen import clear
 from controllers import menu_home_controller
@@ -8,7 +8,7 @@ from controllers.auth_controller import AuthController
 
 
 class UpdateUserMenuController:
-    """menu controller pour les clients"""
+    """menu controller pour les Users"""
     def __init__(self, token):
         self.menu = Menu()
         self.view = UpdateUserMenuView(self.menu)

@@ -2,12 +2,10 @@
 from controllers import menu_user_controller
 from models.employe import CustomUser
 from utils.user import UtilsUser
+from utils.validate import Validate
 from views.user_view import AddUserView, EditUserView
 from sqlalchemy.orm import sessionmaker
 from database import engine
-from rich.console import Console
-from rich.text import Text
-# from .menu_update_user_controller import UpdateUserMenuController
 
 
 class UserController:
@@ -21,23 +19,19 @@ class UserController:
 
     def add_user(self, token):
         """ Création d'un employé """
-        console = Console()
         user_create = self.view.new_user()
         session = self.session()
         if not user_create == -1:
             user = self.user(**user_create)
             session.add(user)
             session.commit()
-            text = (Text("L'employé à été créé avec succès dans la bd", style="green"))
-            console.print(text)
             session.close()
-            text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
-            console.print(text)
-            input("")
+            validate = "L'employé à été créé avec succès dans la bd"
+            Validate.validate_bd(self, validate)
             return self.menu_back(self.token)
         else:
-            text = (Text("l'utilisateur ne sera pas enregistré", style="red"))
-            console.print(text)
+            validate = "l'utilisateur ne sera pas enregistré"
+            Validate.validate_bd(self, validate)
             return self.menu_back()
 
     def delete_user(self, token):
@@ -59,24 +53,17 @@ class UserController:
         session.delete(user)
         session.commit()
         session.close()
-        console = Console()
-        text = (Text("L'employé à été supprimé avec succès dans la bd", style="green"))
-        console.print(text)
-        session.close()
-        text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
-        console.print(text)
-        input("")
+        validate = "L'employé à été supprimé avec succès dans la bd"
+        Validate.validate_bd(self, validate)
         return self.menu_back(self.token)
 
     def view_all_user(self, token):
-        console = Console()
         session = self.session()
         users = session.query(CustomUser).all()
         session.close()
         EditUserView.view_users(self, users)
-        text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
-        console.print(text)
-        input("")
+        validate = ""
+        Validate.validate_bd(self, validate)
         return self.menu_back(self.token)
 
     def view_user(self, token):
@@ -85,10 +72,8 @@ class UserController:
         user = session.query(CustomUser).filter_by(id=choice).first()
         session.close()
         EditUserView.view_one_user(self, user)
-        text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
-        console = Console()
-        console.print(text)
-        input("")
+        validate = ""
+        Validate.validate_bd(self, validate)
         return self.menu_back(self.token)
 
     def menu_back(self, token):

@@ -5,8 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from database import engine
 from models.client import Client
 from models.contract import Contract
-from rich.console import Console
-from rich.text import Text
+from utils.validate import Validate
 
 
 class ContratController:
@@ -19,7 +18,6 @@ class ContratController:
         self.view = ContractView()
 
     def add_contrat(self, token):
-        console = Console()
         session = self.session()
         clients = session.query(Client).all()
         session.close()
@@ -29,19 +27,13 @@ class ContratController:
             contract = self.contract(**add_contract)
             session.add(contract)
             session.commit()
-            text = (Text("Le contrat à été créé avec succès dans la bd", style="green"))
-            console.print(text)
             session.close()
-            text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
-            console.print(text)
-            input("")
+            validate = "Le contrat à été créé avec succès dans la bd"
+            Validate.validate_bd(self, validate)
             return self.menu_back(self.token)
         else:
-            text = (Text("le contrat ne sera pas enregistré", style="red"))
-            console.print(text)
-            text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
-            console.print(text)
-            input("")
+            validate = "le contrat ne sera pas enregistré"
+            Validate.validate_bd(self, validate)
             return self.menu_back(self.token)
 
     def modify_contrat(self, token):

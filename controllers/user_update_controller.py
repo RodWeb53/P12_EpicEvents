@@ -5,6 +5,7 @@ from utils.user import UtilsUser
 from views.update_user_view import UpdateUserView
 from sqlalchemy.orm import sessionmaker
 from database import engine
+from utils.validate import Validate
 
 
 class UpdateUserController:
@@ -37,6 +38,8 @@ class UpdateUserController:
         user.first_name = first_name_update
         session.commit()
         session.close()
+        validate = "Le prénom à été modifié avec succès dans la bd"
+        Validate.validate_bd(self, validate)
         return self.menu_back(self.token)
 
     def update_user_last_name(self, token):
@@ -60,6 +63,8 @@ class UpdateUserController:
         user.last_name = last_name_update
         session.commit()
         session.close()
+        validate = "Le nom à été modifié avec succès dans la bd"
+        Validate.validate_bd(self, validate)
         return self.menu_back(self.token)
 
     def update_user_email(self, token):
@@ -83,6 +88,8 @@ class UpdateUserController:
         user.email = email_update
         session.commit()
         session.close()
+        validate = "L'email' à été modifié avec succès dans la bd"
+        Validate.validate_bd(self, validate)
         return self.menu_back(self.token)
 
     def update_user_phone(self, token):
@@ -106,6 +113,8 @@ class UpdateUserController:
         user.phone = phone_update
         session.commit()
         session.close()
+        validate = "Le téléphone fixe à été modifié avec succès dans la bd"
+        Validate.validate_bd(self, validate)
         return self.menu_back(self.token)
 
     def update_user_phone_mobile(self, token):
@@ -129,6 +138,8 @@ class UpdateUserController:
         user.phone_mobile = phone_mobile_update
         session.commit()
         session.close()
+        validate = "Le téléphone mobile à été modifié avec succès dans la bd"
+        Validate.validate_bd(self, validate)
         return self.menu_back(self.token)
 
     def update_user_role(self, token):
@@ -152,6 +163,8 @@ class UpdateUserController:
         user.role_id = role_update
         session.commit()
         session.close()
+        validate = "Le role à été modifié avec succès dans la bd"
+        Validate.validate_bd(self, validate)
         return self.menu_back(self.token)
 
     def update_user_is_active(self, token):
@@ -175,6 +188,8 @@ class UpdateUserController:
         user.is_active = is_active_update
         session.commit()
         session.close()
+        validate = "L'activation' à été modifiée avec succès dans la bd"
+        Validate.validate_bd(self, validate)
         return self.menu_back(self.token)
 
     def menu_back(self, token):
