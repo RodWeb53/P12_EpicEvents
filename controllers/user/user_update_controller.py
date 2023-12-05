@@ -1,8 +1,8 @@
 """Module controller du Update menu Utilisateur"""
-from controllers import menu_update_user_controller
+from controllers.user import menu_update_user_controller
 from models.employe import CustomUser
 from utils.user import UtilsUser
-from views.update_user_view import UpdateUserView
+from views.user.update_user_view import UpdateUserView
 from sqlalchemy.orm import sessionmaker
 from database import engine
 from utils.validate import Validate

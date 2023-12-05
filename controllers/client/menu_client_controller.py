@@ -1,7 +1,7 @@
 """Module controller du menu Client"""
 from utils.menus import Menu
 from controllers import menu_home_controller
-from views.menu_client_view import ClientMenuView
+from views.client.menu_client_view import ClientMenuView
 from .client_controller import ClientController
 from .menu_update_client_controller import UpdateClientMenuController
 from controllers.auth_controller import AuthController
@@ -22,7 +22,7 @@ class ClientMenuController:
         self.menu.add("auto", "Afficher un client", ClientController(self.token).view_client)
         self.menu.add("auto", "Ajouter un client", ClientController(self.token).add_client)
         self.menu.add("auto", "Modifier un client", UpdateClientMenuController(self.token))
-        self.menu.add("auto", "Supprimer un client", ClientController(self.token).modify_client)
+        self.menu.add("auto", "Supprimer un client", ClientController(self.token).delete_client)
         # Ajouter les autres lignes d'option du menus
         self.menu.add("auto", "Menu principal", menu_home_controller.HomeMenuController())
         # 2 Demander à la vue d'afficher le menu et de collecter la réponse de l'utilisateur

@@ -2,10 +2,10 @@
 from utils.menus import Menu
 from utils.clean_screen import clear
 from views.menu_home_view import HomeMenuView
-from .menu_client_controller import ClientMenuController
-from .menu_contrat_controller import ContratMenuController
-from .menu_event_controller import EventMenuController
-from .menu_user_controller import UserMenuController
+from .client.menu_client_controller import ClientMenuController
+from .contract.menu_contrat_controller import ContratMenuController
+from .event.menu_event_controller import EventMenuController
+from .user.menu_user_controller import UserMenuController
 
 
 class HomeMenuController():

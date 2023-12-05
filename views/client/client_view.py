@@ -51,7 +51,7 @@ class ClientView:
 
         for client in clients:
             table.add_row(f"{client.client_id}",
-                          f"{client.full_name}",
+                          f"{client.company_name}",
                           f"{client.contact_commercial.first_name}",
                           f"{client.contact_commercial.last_name}")
 

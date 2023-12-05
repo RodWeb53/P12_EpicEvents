@@ -1,31 +1,30 @@
-"""Module controller du menu Client"""
+"""Module controller du menu contrat"""
 from utils.menus import Menu
 from utils.clean_screen import clear
 from controllers import menu_home_controller
-from views.menu_user_view import UserMenuView
-from .user_controller import UserController
-from .menu_update_user_controller import UpdateUserMenuController
+from views.contract.menu_update_contrat_view import UpdateContractMenuView
+from .contrat_update_controller import UpdateContractController
 from controllers.auth_controller import AuthController
 
 
-class UserMenuController:
+class UpdateContratMenuController:
     """menu controller pour les clients"""
     def __init__(self, token):
         self.menu = Menu()
-        self.view = UserMenuView(self.menu)
+        self.view = UpdateContractMenuView(self.menu)
         self.token = token
 
     def __call__(self, token):
         clear()
         # 1. Construire le menu (utils/menus.py)
         auth = AuthController.decrypt_token(self, self.token)
-        self.menu.add("auto", "Afficher tous les utilisateurs", UserController(self.token).view_all_user)
-        self.menu.add("auto", "Afficher un utilisateur", UserController(self.token).view_user)
-        # Vérification des droits via la token
         if auth["role_id"] == 2:
-            self.menu.add("auto", "Ajouter un utilisateur", UserController(self.token).add_user)
-            self.menu.add("auto", "Modifier un utilisateur", UpdateUserMenuController(self.token))
-            self.menu.add("auto", "Supprimer un utilisateur", UserController(self.token).delete_user)
+            self.menu.add("auto", "Modification du montant du contrat",
+                          UpdateContractController(self.token).update_contract_amount)
+            self.menu.add("auto", "Modification du montant restant à recevoir",
+                          UpdateContractController(self.token).update_due_payment)
+            self.menu.add("auto", "Modification du statut du contrat",
+                          UpdateContractController(self.token).update_contract_status)
 
         # Ajout de la ligne de retour au menu
         self.menu.add("auto", "Menu principal", menu_home_controller.HomeMenuController())

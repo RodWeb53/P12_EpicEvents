@@ -8,11 +8,11 @@ class UtilsContract:
     def __init__(self):
         pass
 
-    def display_contract_amount(self):
+    def display_contract_amount(self, change):
         """Demande du montant du contrat"""
         console = Console()
         print("")
-        text = (Text("Entrez le montant du contrat :", style="blue"))
+        text = (Text(f"Entrez le montant {change} :", style="blue"))
         console.print(text)
         contract_amount = Prompt.ask("Votre saisie >> ")
         create_entry = True
@@ -28,25 +28,25 @@ class UtilsContract:
                 console.print(text)
                 contract_amount = Prompt.ask("Votre nouvelle saisie >> ")
 
-    def display_contract_due_payment(self):
+    def display_contract_due_payment(self, change):
         """Demande des sommes reçues"""
         console = Console()
         print("")
-        text = (Text("Entrez le montant reçue :", style="blue"))
+        text = (Text(f"Entrez le montant reçu {change} :", style="blue"))
         console.print(text)
-        contract_amount = Prompt.ask("Votre saisie >> ")
+        due_payment = Prompt.ask("Votre saisie >> ")
         create_entry = True
         while create_entry:
             try:
-                float(contract_amount)
+                float(due_payment)
                 create_entry = False
-                return contract_amount
+                return due_payment
             except ValueError:
                 text = (Text("Le montant est obligatoirement en chiffre", style="red"))
                 console.print(text)
                 text = (Text("Entrez de nouveau un montant :", style="red"))
                 console.print(text)
-                contract_amount = Prompt.ask("Votre nouvelle saisie >> ")
+                due_payment = Prompt.ask("Votre nouvelle saisie >> ")
 
     def display_menu_status_contract(self):
         """Demande sur le status du contrat (signé ou pas)"""

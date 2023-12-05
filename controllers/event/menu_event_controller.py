@@ -1,7 +1,7 @@
 """Module controller du menu Evenement"""
 from utils.menus import Menu
 from controllers import menu_home_controller
-from views.menu_event_view import EventMenuView
+from views.event.menu_event_view import EventMenuView
 from .event_controller import EventController
 
 

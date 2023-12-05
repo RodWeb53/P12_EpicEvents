@@ -1,6 +1,6 @@
 """Module controller du menu Evenement"""
 from controllers import menu_home_controller
-from views.event_view import EventView
+from views.event.event_view import EventView
 from models.event import Event
 from models.contract import Contract
 from models.employe import CustomUser

@@ -1,11 +1,10 @@
 """Module controller du menu Client"""
-from controllers import menu_client_controller
+from controllers.client import menu_client_controller
 from models.client import Client
-from views.client_view import ClientView
+from views.client.client_view import ClientView
+from utils.validate import Validate
 from sqlalchemy.orm import sessionmaker
 from database import engine
-from rich.console import Console
-from rich.text import Text
 
 
 class ClientController:
@@ -19,31 +18,18 @@ class ClientController:
 
     def add_client(self, token):
         new_client = self.view.new_client(self.token)
-        console = Console()
         session = self.session()
         if not new_client == -1:
             client = self.client(**new_client)
             session.add(client)
             session.commit()
-            text = (Text("Le client à été créé avec succès dans la bd", style="green"))
-            console.print(text)
-            session.close()
-            text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
-            console.print(text)
-            input("")
+            validate = "Le client à été créé avec succès dans la bd"
+            Validate.validate_bd(self, validate)
             return self.menu_back(self.token)
         else:
-            text = (Text("l'utilisateur ne sera pas enregistré", style="red"))
-            console.print(text)
-            text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
-            console.print(text)
-            input("")
+            validate = "l'utilisateur ne sera pas enregistré"
+            Validate.validate_bd(self, validate)
             return self.menu_back()
-
-    def modify_client(self):
-        print("Modification d'un client")
-        print("Modification d'un client")
-        print("Modification d'un client")
 
     def delete_client(self):
         print("Suppression d'un client")
@@ -51,18 +37,15 @@ class ClientController:
         print("Suppression d'un client")
 
     def view_all_client(self, token):
-        console = Console()
         session = self.session()
         clients = session.query(Client).all()
         session.close()
         self.view.view_clients(clients)
-        text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
-        console.print(text)
-        input("")
+        validate = ""
+        Validate.validate_bd(self, validate)
         return self.menu_back(self.token)
 
     def view_client(self, token):
-        console = Console()
         session = self.session()
         clients = session.query(Client).all()
         session.close()
@@ -71,9 +54,8 @@ class ClientController:
         session = self.session()
         client = session.query(Client).filter_by(client_id=int(choice)).first()
         self.view.view_one_client(client)
-        text = (Text("Appuyer sur entrée pour revenir au menu", style="red"))
-        console.print(text)
-        input("")
+        validate = ""
+        Validate.validate_bd(self, validate)
         return self.menu_back(self.token)
 
     def menu_back(self, token):

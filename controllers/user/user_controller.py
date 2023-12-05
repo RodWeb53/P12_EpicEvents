@@ -1,9 +1,9 @@
 """Module controller du menu Utilisateur"""
-from controllers import menu_user_controller
+from controllers.user import menu_user_controller
 from models.employe import CustomUser
 from utils.user import UtilsUser
 from utils.validate import Validate
-from views.user_view import AddUserView, EditUserView
+from views.user.user_view import AddUserView, EditUserView
 from sqlalchemy.orm import sessionmaker
 from database import engine
 

@@ -2,7 +2,7 @@
 from utils.menus import Menu
 from utils.clean_screen import clear
 from controllers import menu_home_controller
-from views.menu_update_user import UpdateUserMenuView
+from views.user.menu_update_user import UpdateUserMenuView
 from .user_update_controller import UpdateUserController
 from controllers.auth_controller import AuthController
 
